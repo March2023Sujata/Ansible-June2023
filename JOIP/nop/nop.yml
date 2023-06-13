@@ -8,3 +8,16 @@
         name: "{{ dotnet }}"
         update_cache: yes   
         state: present 
+
+    - name: Create group
+      ansible.builtin.group:
+        name: "{{ group }}"
+        state: present
+    
+    - name: Create user
+      ansible.builtin.user:
+        name: "{{ user }}"
+        group: "{{ group }}"
+        create_home: true
+        home: "{{ home_dir }}"
+        

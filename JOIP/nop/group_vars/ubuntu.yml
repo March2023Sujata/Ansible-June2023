@@ -1,2 +1,4 @@
 dotnet: dotnet-sdk-7.0
-
+group: nop
+user: nop
+home_dir: /var/www/nop
