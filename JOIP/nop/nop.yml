@@ -20,4 +20,21 @@
         group: "{{ group }}"
         create_home: true
         home: "{{ home_dir }}"
-        
+
+    - name: Download NopCommerce 
+      ansible.builtin.get_url:
+        url: "{{ nop_url }}"
+        dest: "{{ home_dir }}"
+ 
+    - name: Install unzip
+      ansible.builtin.apt:
+        name: unzip
+        update_cache: yes   
+        state: present 
+    
+    - name: Unzip NopCommerce 
+      ansible.builtin.unarchive:
+        src: "{{ home_dir }}/{{ zip_url }}"
+        dest: "{{ home_dir }}"
+      remote_src: yes
+    
