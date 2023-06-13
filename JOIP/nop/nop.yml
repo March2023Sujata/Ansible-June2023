@@ -5,6 +5,6 @@
   tasks:
     - name: Install dotnet 7
       ansible.builtin.apt:
-        name: {{ dotnet }}
+        name: "{{ dotnet }}"
         update_cache: yes   
         state: present 
