@@ -36,5 +36,5 @@
       ansible.builtin.unarchive:
         src: "{{ home_dir }}/{{ zip_url }}"
         dest: "{{ home_dir }}"
-      remote_src: yes
+        remote_src: yes
     
