@@ -38,3 +38,10 @@
         dest: "{{ home_dir }}"
         remote_src: yes
     
+    - name: Create bin and logs folder
+      ansible.builtin.file:
+        path: 
+          - "{{ home_dir }}/bin"
+          - "{{ home_dir }}/logs"
+        state: directory
+    
