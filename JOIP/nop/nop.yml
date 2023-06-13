@@ -55,13 +55,19 @@
         recurse: yes
 
     - name: Copy nop.service file
-      ansible.builtin.copy:
-        src: nop.service
+      ansible.builtin.template:
+        src: nop.service.j2
         dest: /etc/systemd/system/nop.service
+      notify: daemon relaod
 
     - name: Enable and start nop.service
       ansible.builtin.service:
-        name: nop.service
+        name: nop
         enabled: true
         state: started
+
+  handlers: 
+    - name: daemon reload
+      ansible.builtin.systemd:
+        daemon_reload: true
     
