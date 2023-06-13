@@ -44,4 +44,24 @@
           - "{{ home_dir }}/bin"
           - "{{ home_dir }}/logs"
         state: directory
+
+    - name: Give full permissions 
+      ansible.builtin.file:
+        path: "{{ home_dir }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: "0777"
+        state: directory
+        recurse: yes
+
+    - name: Copy nop.service file
+      ansible.builtin.copy:
+        src: nop.service
+        dest: /etc/systemd/system/nop.service
+
+    - name: Enable and start nop.service
+      ansible.builtin.service:
+        name: nop
+        enabled: yes
+        state: started
     
