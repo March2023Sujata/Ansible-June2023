@@ -61,7 +61,7 @@
 
     - name: Enable and start nop.service
       ansible.builtin.service:
-        name: nop
-        enabled: yes
+        name: nop.service
+        enabled: true
         state: started
     
