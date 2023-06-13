@@ -1,0 +1,59 @@
+https://github.com/testMarch/ansible_roles.git
+----------------------------------------------------------------------------------------------------
+
+
+ansible-galaxy role --help
+ansible-galaxy role init --help
+
+First
+-------------------------------------------------------------------------------------------------
+
+<create a dir for a role in control node>
+
+ansible-galaxy role init <role-name>
+
+ansible-galaxy role init generic
+
+ls
+
+<generic dir is created>
+<now copy this folder to laptop>
+
+exit
+
+sftp devops@<control-node-ip>
+C:\Sujata\Quality_Thought\Notes\Ansible\JOIP\tomcat-role> sftp devops@4.231.236.10
+
+sftp> get -r generic
+sftp> bye
+
+<generic dir get copied into the tomcat-role dir>
+
+------------------------------------------------------------------------------------------------
+
+second
+-------
+
+now create a dir and name it as tomcat10
+(for creating tomcat role)
+copy all folders in it<def-ault,files......etc total 8 dir>
+---------------------------------------------------------------------------------------------------
+
+Third
+------
+inside task dir:-
+create centos.yml, ubuntu.yml, common.yml files
+
+inside handlers dir:
+copy all handlers in main.yml file
+
+inside template dir:
+copy all j2 files and paste it here
+
+inside default dir:
+copy all variables in main.yml
+
+
+
+
+

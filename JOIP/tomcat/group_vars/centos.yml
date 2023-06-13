@@ -1,0 +1,13 @@
+---
+java_package: java-11-openjdk
+group: tomcat
+user: tomcat
+home_dir: /opt/tomcat
+shell: /bin/false
+tomcat_version: 10.1.9
+tomcat_major_version: 10
+tomcat_url: https://www-eu.apache.org/dist/tomcat/tomcat-{{ tomcat_major_version }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz
+download_dir: /tmp/apache-tomcat-{{ tomcat_version }}.tar.gz
+tomcat_user_name: devops
+tomcat_user_pwd: devops
+tomcat_context_valve: ".*"

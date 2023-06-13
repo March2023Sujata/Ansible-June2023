@@ -1,0 +1,10 @@
+---
+- name: install dotnet on ubuntu
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: install dotnet
+      apt:
+        name: dotnet-sdk-7.0
+        update_cache: yes   
+        state: present

@@ -1,0 +1,44 @@
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html#playbook-syntax
+https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_conditionals.html#ansible-facts-distribution
+
+Finding the module:
+search google with <command> in ansible
+
+or
+search from ansible docs
+https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html
+
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+-------------------------------------------------------------------------------------------------
+ansible -m ping -i hosts all
+ansible -m ping -i inventory/hosts all
+
+ansible-playbook -i <inventory-path> <playbook-path>
+ansible-playbook -i inventory/hosts playbooks/first.yml
+
+ansible-playbook -i <inventory-path> --syntax-check <playbook-path>
+ansible-playbook -i inventory/hosts --syntax-check playbooks/lamp/lamp.yml
+------------------------------------------------------------------------------------------------
+
+ ansible -i '10.3.0.6, 10.3.0.5' -m ping all
+
+ansible-playbook -i inventory/hosts playbooks/lamp/ubuntu.yml --list-hosts
+
+ansible -m 'setup' -i '10.3.0.6, ' all
+ansible -m 'setup' -i '10.3.0.6, ' -a 'filter=*distribution*' all
+
+ansible-playbook -i inventory/hosts playbooks/lamp/lamp.yml -e 'info_page=/var/www/html/myinfo.php' --check  
+(to change/pass variable at run time by -e, override the value)
+
+ansible-playbook -i inventory/hosts playbooks/lamp/ubuntu.yml --tags check
+(tag "check "will be given to a task, then after running above cmd, will only run a task that has tag as "check" )
+
+ansible-playbook -i inventory/hosts playbooks/lamp/ubuntu.yml --step
+(playbook will run step by step by asking, confirmation as do u want to continue: No,yes,continue)
+
+
+ansible-playbook -i inventory/hosts playbooks/lamp/ubuntu.yml -f 1
+(it will run playbook task by task in a one(any) machine at a time)
+ansible-playbook -i inventory/hosts playbooks/lamp/ubuntu.yml -f 2
+(2 machines paralley)

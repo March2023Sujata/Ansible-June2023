@@ -1,0 +1,5 @@
+You may now add content to the webroot directory. Note that until you do so, people visiting your website will see this page, and not your content.
+
+For systems using the Apache HTTP Server: You may now add content to the directory /var/www/html/. Note that until you do so, people visiting your website will see this page, and not your content. To prevent this page from ever being used, follow the instructions in the file /etc/httpd/conf.d/welcome.conf.
+
+For systems using NGINX: You should now put your content in a location of your choice and edit the root configuration directive in the nginx configuration file /etc/nginx/nginx.conf.

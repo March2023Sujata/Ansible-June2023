@@ -1,0 +1,50 @@
+https://galaxy.ansible.com/geerlingguy/mysql
+-----------------------------------------------------------------------------------------------------------
+for localhost(rum following cmd in control node)
+ssh-copy-id devops@localhost
+
+ansible -m ping -i hosts all
+
+mkdir sql-role
+
+first
+-----
+
+install mysql from galaxy
+
+ansible-galaxy install geerlingguy.mysql
+
+
+second
+-------------------------------------------------
+sql.yml
+
+---
+- name: Install mysql
+  hosts: all
+  become: yes   
+  roles:
+    - role: geerlingguy.mysql
+      vars:
+        mysql_user_name: sujata
+        mysql_user_password: sujata 
+        
+
+hosts
+------
+localhost
+
+
+ansible -m ping -i hosts all
+
+ansible-playbook -i hosts sql.yml
+
+sudo systemctl status mysql
+
+mysql -u sujata -p
+Enter password: sujata
+
+mysql> show databases;
+
+
+

@@ -1,0 +1,63 @@
+---
+- name: install lamp server
+  hosts: webservers
+  become: true    
+  tasks:
+    - name: check if the playbook is being executed on supported os
+      ansible.builtin.fail:
+        msg: "This playbook is designed to work on ubuntu and redhat only"
+      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "CentOS"
+
+    - name: install apache
+      ansible.builtin.package:
+        name: "{{ package_name}}"
+        update_cache: yes   
+        state: present
+      notify: Apache is installed
+
+    - name: enable apache
+      ansible.builtin.systemd:
+        name: "{{ package_name}}"
+        enabled: true
+        state: started
+      notify: Apache is enabled 
+
+    - name: install php packages
+      ansible.builtin.package:
+        name: "{{ item }}"          
+        update_cache: yes
+        state: present
+      loop: "{{ php_packages }}"
+      notify: 
+        - restart apache
+        - install php packages
+
+    - name: copy info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: "{{ info_page }}"
+      notify: 
+        - restart apache
+        - info php
+
+  handlers:
+    - name: restart apache
+      ansible.builtin.systemd:
+        name: "{{ package_name }}"
+        state: restarted
+
+    - name: Apache is installed
+      ansible.builtin.debug:
+        msg: "Apache is installed using package {{ package_name }} "
+    
+    - name: Apache is enabled
+      ansible.builtin.debug:
+        msg: "Apache is enabled and stated"
+    
+    - name: install php packages
+      ansible.builtin.debug:
+        msg: "PHP packages are installed {{ php_packages }} "
+   
+    - name: info php
+      ansible.builtin.debug:
+        msg: "Created info.php at {{ info_page }} "

@@ -1,0 +1,21 @@
+---
+- name: exploring facts
+  hosts: all
+  become: no
+  tasks:
+    - name: Printing OS info
+      ansible.builtin.debug:
+        msg: "Family:{{ ansible_facts['os_family'] }} Distribution:{{ ansible_facts['distribution']}}"
+    - name: print networking information
+      ansible.builtin.debug:
+        msg: "Networking:{{ansible_facts.eth0.ipv4.address}}"
+    - name: print Kernal version
+      ansible.builtin.debug:
+        msg: "Kernal_Version:{{ansible_facts.kernel_version}}"
+    - name: Node Name
+      ansible.builtin.debug:
+        var: ansible_nodename
+    - name: IP address of node
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']
+        

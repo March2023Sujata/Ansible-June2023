@@ -1,0 +1,40 @@
+https://galaxy.ansible.com/search?keywords=nginx&order_by=-relevance&page=1&deprecated=false&type=role
+https://galaxy.ansible.com/geerlingguy/nginx
+-----------------------------------------------------------------------------------------------------------
+for localhost(rum following cmd in control node)
+ssh-copy-id devops@localhost
+
+ansible -m ping -i hosts all
+
+mkdir nginx-role
+
+first
+-----
+
+install nginx form galaxy
+
+ansible-galaxy install geerlingguy.nginx
+
+
+second
+-------------------------------------------------
+nginx.yml
+
+---
+- hosts: all
+  become: yes   
+  roles:
+    - { role: geerlingguy.nginx }
+
+hosts
+------
+localhost
+
+
+ansible -m ping -i hosts all
+
+ansible-playbook -i hosts nginx.yml
+
+sudo systemctl status nginx.service
+
+

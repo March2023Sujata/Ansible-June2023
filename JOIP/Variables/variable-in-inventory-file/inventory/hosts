@@ -1,0 +1,9 @@
+[ubuntu]
+10.3.0.5 package_name=apache2 php_packages='["php","libapache2-mod-php","php-mysql"]'
+
+[centos]
+10.3.0.6 package_name=httpd php_packages='["php"]'
+
+[webservers]
+10.3.0.6
+10.3.0.5

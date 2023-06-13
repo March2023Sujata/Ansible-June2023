@@ -1,0 +1,37 @@
+uninstall apache 1st then install nginx
+--------------------------------------------------------------------------------------------------------------------
+
+install lamp server on ubuntu(LAMP (Linux, Apache, MySQL, PHP/Perl/Python)
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04
+
+
+---------------------manual------------------------------------------------------------------------------------------
+sudo apt update
+sudo apt install apache2 -y
+sudo apt install php libapache2-mod-php php-mysql -y
+# Create a file called as /var/www/html/info.php with below content
+# <?php phpinfo(); ?>
+sudo -i
+echo '<?php phpinfo(); ?>' > /var/www/html/info.php
+exit
+sudo systemctl restart apache2
+---------------------------------------------------------------------------------------------------------------------
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
+---------------------------------------------------------------------------------------------------------------------
+
+install lamp server on redhat
+
+sudo yum install httpd -y
+sudo systemctl enable httpd
+sudo systemctl start httpd
+sudo yum install php -y
+sudo -i
+echo '<?php phpinfo(); ?>' > /var/www/html/info.php
+exit
+sudo systemctl restart httpd
+---------------------------------------------------------------------------------------------------------------------
+sudo yum erase httpd httpd-tools apr apr-util
+
+redhat not working
+------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,33 @@
+---
+- name: Install Metricbeat
+  hosts: ubuntu
+  become: yes  
+  tasks:
+    - name: Download and install the Public Signing Key
+      ansible.builtin.apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Install the apt-transport-https package
+      ansible.builtin.apt: 
+        name: apt-transport-https
+        state: present
+        
+    - name: Save the repository definition to /etc/apt/sources.list.d/elastic-8.x.list
+      ansible.builtin.shell:
+        cmd: echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+
+    - name: Install Metricbeat
+      ansible.builtin.apt: 
+        name: metricbeat
+        update_cache: yes  
+        state: present
+      notify: enable metricbeat
+
+  handlers:
+    - name: enable metricbeat
+      ansible.builtin.service:
+        name: metricbeat
+        enabled: true
+        state: started
+

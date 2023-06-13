@@ -1,0 +1,27 @@
+---
+- name: install nginx server
+  hosts: all
+  become: true
+  tasks:
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        update_cache: yes
+        state: present 
+    - name: install php packages
+      ansible.builtin.apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql  
+        update_cache: yes
+        state: present
+    - name: copy info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+    - name: restart nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+      

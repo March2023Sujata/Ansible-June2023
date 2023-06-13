@@ -1,0 +1,29 @@
+---
+- name: install lamp server in Centos
+  hosts: all
+  become: true
+  tasks:
+    - name: install apache
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+    - name: enable apache
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: true
+        state: started
+    - name: install php
+      ansible.builtin.yum:
+        name: php
+        state: present
+      notify: restart apache
+    - name: copy info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+      notify: restart apache
+  handlers: 
+    - name: restart apache
+      ansible.builtin.systemd:
+        name: httpd
+        state: restarted
