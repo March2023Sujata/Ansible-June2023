@@ -3,4 +3,8 @@
   become: yes  
   hosts: ubuntu
   roles:
-    - role: nop
+    - nop
+    - geerlingguy.mysql
+  vars: 
+    mysql_user_name: sujata
+    mysql_user_password: sujata 

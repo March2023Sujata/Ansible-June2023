@@ -1,0 +1,9 @@
+first
+-----
+
+install mysql from galaxy in control node
+-----------------------------------------
+
+ansible-galaxy install geerlingguy.mysql
+
+include sql role in nop.yml with variables
