@@ -7,3 +7,22 @@ install mysql from galaxy in control node
 ansible-galaxy install geerlingguy.mysql
 
 include sql role in nop.yml with variables
+
+Second
+------
+
+after run playbook
+then
+in mc(where nop and sql installed)
+
+sudo mysql
+(create user and give full permission)
+CREATE USER 'nop'@'%' IDENTIFIED BY 'nop12345';
+GRANT ALL PRIVILEGES ON *.* to 'nop'@'%';
+FLUSH PRIVILEGES;
+exit
+
+--------------------------------------------------------------------------------
+enter following values:
+
+server name= ip of mc where nop and sql installed
