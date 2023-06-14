@@ -8,3 +8,4 @@
   vars: 
     mysql_user_name: sujata
     mysql_user_password: sujata 
+    mysql_bind_address: 0.0.0.0
