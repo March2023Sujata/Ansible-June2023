@@ -58,7 +58,7 @@
       ansible.builtin.template:
         src: nop.service.j2
         dest: /etc/systemd/system/nop.service
-      notify: daemon relaod
+      notify: daemon reload
 
     - name: Enable and start nop.service
       ansible.builtin.service:
