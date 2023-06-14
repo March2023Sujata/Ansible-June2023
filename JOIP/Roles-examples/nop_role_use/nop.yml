@@ -1,0 +1,6 @@
+---
+- name: Install NopCommerce 
+  become: yes  
+  hosts: ubuntu
+  roles:
+    - role: nop
