@@ -32,11 +32,17 @@
         update_cache: yes   
         state: present 
     
+    - name: Check if NopCommerce is already extracted
+      ansible.builtin.stat:
+        path: "{{ home_dir }}/Nop.Web.dll"
+      register: nop_info
+
     - name: Unzip NopCommerce 
       ansible.builtin.unarchive:
         src: "{{ home_dir }}/{{ zip_url }}"
         dest: "{{ home_dir }}"
         remote_src: yes
+      when: not nop_info.stat.exists
     
     - name: Create bin and logs folder
       ansible.builtin.file:
@@ -44,15 +50,7 @@
           - "{{ home_dir }}/bin"
           - "{{ home_dir }}/logs"
         state: directory
-
-    - name: Give full permissions 
-      ansible.builtin.file:
-        path: "{{ home_dir }}"
-        owner: "{{ user }}"
-        group: "{{ group }}"
-        mode: "0777"
-        state: directory
-        recurse: yes
+      notify:  Give full permissions 
 
     - name: Copy nop.service file
       ansible.builtin.template:
@@ -70,4 +68,13 @@
     - name: daemon reload
       ansible.builtin.systemd:
         daemon_reload: true
+
+    - name: Give full permissions 
+      ansible.builtin.file:
+        path: "{{ home_dir }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: "0777"
+        state: directory
+        recurse: yes
     
